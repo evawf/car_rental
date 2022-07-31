@@ -1,5 +1,5 @@
-import Modal from "./Modal/Modal.jsx";
-import Car from "./Car.jsx";
+import Modal from "./Modal/Modal.js";
+import Car from "./Car.js";
 import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";

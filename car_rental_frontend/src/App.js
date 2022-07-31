@@ -2,10 +2,10 @@ import React from "react";
 import "./App.css";
 import { useState } from "react";
 import axios from "axios";
-import Cars from "./components/Cars";
+import Cars from "./components/Cars.js";
 // import { Link, Outlet } from "react-router-dom";
-// import Modal from "./components/Modal/Modal.jsx";
-// import Car from "./components/Car.jsx";
+// import Modal from "./components/Modal/Modal.js";
+// import Car from "./components/Car.js";
 
 // make sure that axios always sends the cookies to the backend server
 axios.defaults.withCredentials = true;

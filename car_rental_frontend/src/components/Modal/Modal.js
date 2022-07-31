@@ -7,7 +7,7 @@ export default function Modal(ChildComponent) {
   if (isVisible) {
     return (
       <div className="modal-container">
-        <div className="modal">
+        <div className="modal" style={{ backgroundColor: "pink", zIndex: 1 }}>
           <button className="modal-close" onClick={() => setIsVisible(false)}>
             X
           </button>
