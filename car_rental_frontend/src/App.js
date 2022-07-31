@@ -1,8 +1,15 @@
-import React from "react";
 import "./App.css";
-import { useState } from "react";
+import React, { useReducer, useState } from "react";
 import axios from "axios";
 import Cars from "./components/Cars.js";
+import {
+  initalState,
+  toDoReducer,
+  addBookingAction,
+  updateBookingAction,
+  cancelBookingAction,
+} from "./todo.js";
+
 // import { Link, Outlet } from "react-router-dom";
 // import Modal from "./components/Modal/Modal.js";
 // import Car from "./components/Car.js";
@@ -13,17 +20,30 @@ axios.defaults.withCredentials = true;
 const BACKEND_URL =
   process.env.REACT_APP_CAR_RENTAL_BACKEND_URL || "http://localhost:3004";
 
+const ToDosContext = React.createContext(null);
+
 function App() {
+  const [showCarsList, setShowCarsList] = useState(false);
+  const [carsList, setCarsList] = useState([]);
+  const [todoList, dispatch] = useReducer(toDoReducer, initalState);
+
+  return (
+    <ToDosContext.Provider value={dispatch}>
+      <div className="App" style={{ marginTop: "50px" }}>
+        <SearchForm setShowCarsList={setShowCarsList} />
+        {showCarsList && <Cars carsList={carsList} todoList={todoList} />}
+      </div>
+    </ToDosContext.Provider>
+  );
+}
+
+function SearchForm() {
   const initalVal = {
     pickupLocation: "",
     pickupDate: "",
     dropoffDate: "",
   };
-
   const [searchParams, setSearchParams] = useState(initalVal);
-  const [carsList, setCarsList] = useState([]);
-  const [showCarsList, setShowCarsList] = useState(false);
-
   const handleSubmit = async () => {
     console.log("clicked!");
     console.log("searchParams", searchParams);
@@ -35,12 +55,10 @@ function App() {
     } catch (error) {
       console.log("Error message: ", error);
     }
-
-    return;
   };
 
   return (
-    <div className="App" style={{ marginTop: "50px" }}>
+    <div>
       <input
         type="location"
         placeholder="Pick-up Location"
@@ -68,8 +86,6 @@ function App() {
       <button type="button" onClick={handleSubmit}>
         Search
       </button>
-      {/* <div>{Modal(Car)}</div> */}
-      {showCarsList && <Cars carsList={carsList} />}
     </div>
   );
 }

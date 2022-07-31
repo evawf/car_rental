@@ -1,6 +1,4 @@
-import { act } from "react-dom/test-utils";
-
-export const initalVal = [
+export const initalState = [
   {
     bookingInfo: {},
     booked: false,
@@ -48,7 +46,7 @@ export function updateBookingAction(bookingId, booked) {
   };
 }
 
-export function cancelBookingAction(bookingId, booked) {
+export function cancelBookingAction(bookingId) {
   return {
     type: CANCEL,
     playload: {
