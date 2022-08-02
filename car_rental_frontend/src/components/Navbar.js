@@ -21,7 +21,7 @@ export default function Navbar() {
         </li>
         <li>
           <NavLink
-            to="Bookings"
+            to="/Bookings"
             className={({ isActive }) =>
               isActive ? activeClassName : undefined
             }
@@ -30,7 +30,7 @@ export default function Navbar() {
           </NavLink>
         </li>
         <li>
-          <NavLink to="About">
+          <NavLink to="/About">
             {({ isActive }) => (
               <span className={isActive ? activeClassName : undefined}>
                 About
