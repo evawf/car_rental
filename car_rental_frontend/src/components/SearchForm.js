@@ -45,7 +45,6 @@ export default function SearchForm({ setCarsList, setShowCarsList }) {
       <label>Start Date</label>
       <input
         type="date"
-        placeholder="Pick-up Date"
         value={searchParams.pickupDate}
         onChange={(e) => {
           setSearchParams({ pickupDate: e.target.value });
@@ -54,7 +53,6 @@ export default function SearchForm({ setCarsList, setShowCarsList }) {
       <label>End Date</label>
       <input
         type="date"
-        placeholder="Drop-off Date"
         value={searchParams.dropoffDate}
         onChange={(e) => {
           setSearchParams({ dropoffDate: e.target.value });

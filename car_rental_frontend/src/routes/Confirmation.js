@@ -1,4 +1,4 @@
-export default function BookingConfirmation() {
+export default function Confirmation() {
   return (
     <div>
       <div>Car details</div>
