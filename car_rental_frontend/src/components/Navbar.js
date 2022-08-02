@@ -9,16 +9,29 @@ export default function Navbar() {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-around",
+          listStyleType: "none",
         }}
       >
         <li>
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/" style={{ textDecoration: "none", color: "white" }}>
+            Home
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/Bookings">Bookings</NavLink>
+          <NavLink
+            to="/Bookings"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            Bookings
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/About">About</NavLink>
+          <NavLink
+            to="/About"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            About
+          </NavLink>
         </li>
       </ul>
     </nav>

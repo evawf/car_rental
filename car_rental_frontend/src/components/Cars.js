@@ -2,8 +2,10 @@ import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, CardActions, Button } from "@mui/material";
+import { CardActionArea, CardActions } from "@mui/material";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+import { Link } from "react-router-dom";
+
 // import {
 //   addBookingAction,
 //   updateBookingAction,
@@ -61,7 +63,7 @@ export default function Cars({ carsList }) {
               alignItems: "center",
             }}
           >
-            <Button style={{ height: "28px" }}>View Deal</Button>
+            <Link to={`/cars/${idx}`}>View Deal</Link>
           </CardActions>
         </Card>
       ))}

@@ -1,9 +1,12 @@
 import React from "react";
+import Navbar from "../components/Navbar";
+
 export default function Bookings() {
   return (
     <>
       <main>
-        <h2>My booking details</h2>
+        <Navbar />
+        <h2>Manage Bookings</h2>
       </main>
     </>
   );

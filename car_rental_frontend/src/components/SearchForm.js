@@ -25,7 +25,15 @@ export default function SearchForm({ setCarsList, setShowCarsList }) {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        width: "250px",
+        textContent: "center",
+      }}
+    >
+      <label>Pickup Location</label>
       <input
         type="location"
         placeholder="Pick-up Location"
@@ -34,6 +42,7 @@ export default function SearchForm({ setCarsList, setShowCarsList }) {
           setSearchParams({ pickupLocation: e.target.value });
         }}
       />
+      <label>Start Date</label>
       <input
         type="date"
         placeholder="Pick-up Date"
@@ -42,6 +51,7 @@ export default function SearchForm({ setCarsList, setShowCarsList }) {
           setSearchParams({ pickupDate: e.target.value });
         }}
       />
+      <label>End Date</label>
       <input
         type="date"
         placeholder="Drop-off Date"
