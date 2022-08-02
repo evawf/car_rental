@@ -18,7 +18,6 @@ export default function Modal(ChildComponent) {
   } else {
     return (
       <div>
-        {/* <button onClick={() => setIsVisible(true)}>View Deal</button> */}
         <Button
           size="small"
           color="primary"
