@@ -1,10 +1,8 @@
-import { Modal } from "./Modal/Modal.js";
-import Car from "../routes/Car.js";
 import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, CardActions } from "@mui/material";
+import { CardActionArea, CardActions, Button } from "@mui/material";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 // import {
 //   addBookingAction,
@@ -15,7 +13,7 @@ import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 // import Box from "@mui/material/Box";
 // import CardMedia from "@mui/material/CardMedia";
 
-export default function Cars({ carsList, todoList }) {
+export default function Cars({ carsList }) {
   return (
     <div
       style={{
@@ -32,6 +30,7 @@ export default function Cars({ carsList, todoList }) {
             margin: "1rem 0",
             height: "200px",
             backgroundColor: "darkgray",
+            textAlign: "center",
             color: "black",
           }}
           key={String(idx)}
@@ -59,9 +58,10 @@ export default function Cars({ carsList, todoList }) {
               display: "flex",
               flexDirection: "row",
               justifyContent: "center",
+              alignItems: "center",
             }}
           >
-            {Modal(Car)}
+            <Button style={{ height: "28px" }}>View Deal</Button>
           </CardActions>
         </Card>
       ))}
