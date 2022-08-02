@@ -2,41 +2,23 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
-  let activeStyle = {
-    textDecoration: "underline",
-  };
-
-  let activeClassName = "underline";
-
   return (
     <nav>
-      <ul>
+      <ul
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+        }}
+      >
         <li>
-          <NavLink
-            to="/"
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            Home
-          </NavLink>
+          <NavLink to="/">Home</NavLink>
         </li>
         <li>
-          <NavLink
-            to="/Bookings"
-            className={({ isActive }) =>
-              isActive ? activeClassName : undefined
-            }
-          >
-            Bookings
-          </NavLink>
+          <NavLink to="/Bookings">Bookings</NavLink>
         </li>
         <li>
-          <NavLink to="/About">
-            {({ isActive }) => (
-              <span className={isActive ? activeClassName : undefined}>
-                About
-              </span>
-            )}
-          </NavLink>
+          <NavLink to="/About">About</NavLink>
         </li>
       </ul>
     </nav>
