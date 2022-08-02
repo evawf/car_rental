@@ -63,7 +63,7 @@ export default function Cars({ carsList }) {
               alignItems: "center",
             }}
           >
-            <Link to={`/cars/${idx}`}>View Deal</Link>
+            <Link to={`/cars/${car.id}`}>View Deal</Link>
           </CardActions>
         </Card>
       ))}
