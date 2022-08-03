@@ -6,10 +6,12 @@ class BookingsRouter {
     this.controller = controller;
   }
   router() {
-    // router.get("/bookings", (req, res) => {
-    //   res.sendFile(resolve("dist", "main.html"));
-    // });
-
+    router
+      .get(
+        "/bookings/:id",
+        this.controller.getBookingInfo.bind(this.controller)
+      )
+      .post("/booking", this.controller.postBooking.bind(this.controller));
     return router;
   }
 }
