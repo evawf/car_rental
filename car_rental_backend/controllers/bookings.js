@@ -5,14 +5,35 @@ class Bookings extends Base {
     super(model);
   }
 
-  async getBookingInfo(req, res) {
-    const { id } = req.params;
-    console.log(id);
+  async getMyBookings(req, res) {
+    const { email } = req.query;
+    console.log(email);
+    try {
+      const result = await this.model.findAll({ where: { email: email } });
+      console.log("my booking: ", result);
+      if (result) {
+        res.json({ bookings: result });
+      } else {
+        res.send("You have no booking.");
+      }
+    } catch (error) {
+      console.log("Error message: ", error);
+    }
   }
 
   async postBooking(req, res) {
     const bookingInfo = req.body;
-    console.log(bookingInfo);
+    try {
+      const result = await this.model.create(bookingInfo);
+      console.log("add booking", result);
+      if (result) {
+        res.send("Booking success!");
+      } else {
+        res.send("Booking failed!");
+      }
+    } catch (error) {
+      console.log("Error message: ", error);
+    }
   }
 }
 

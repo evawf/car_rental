@@ -7,10 +7,7 @@ class BookingsRouter {
   }
   router() {
     router
-      .get(
-        "/bookings/:id",
-        this.controller.getBookingInfo.bind(this.controller)
-      )
+      .get("/myBookings", this.controller.getMyBookings.bind(this.controller))
       .post("/booking", this.controller.postBooking.bind(this.controller));
     return router;
   }

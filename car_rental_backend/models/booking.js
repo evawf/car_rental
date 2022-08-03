@@ -1,6 +1,6 @@
 const initBookingModel = (sequelize, DataTypes) => {
   return sequelize.define(
-    "user",
+    "booking",
     {
       id: {
         allowNull: false,
@@ -31,6 +31,10 @@ const initBookingModel = (sequelize, DataTypes) => {
       carId: {
         allowNull: false,
         type: DataTypes.INTEGER,
+        references: {
+          model: "cars",
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,

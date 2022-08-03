@@ -32,6 +32,10 @@ module.exports = {
       car_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: {
+          model: "cars",
+          key: "id",
+        },
       },
       created_at: {
         allowNull: false,
