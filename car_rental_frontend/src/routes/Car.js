@@ -52,7 +52,10 @@ export default function Car() {
         </div>
       )}
       <p>Please input your contact info to book: </p>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        style={{ display: "flex", flexDirection: "column", width: "250px" }}
+      >
         <label>Your Email</label>
         <input
           value={bookingInfo.email}

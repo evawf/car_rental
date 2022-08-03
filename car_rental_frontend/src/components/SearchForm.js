@@ -16,7 +16,7 @@ export default function SearchForm({ setCarsList, setShowCarsList }) {
   const [searchParams, setSearchParams] = useState(initalVal);
   const handleSubmit = async () => {
     try {
-      const result = await axios.get(`${BACKEND_URL}/cars`);
+      const result = await axios.get(`${BACKEND_URL}/availableCars`);
       setCarsList(result.data.cars);
       setShowCarsList(true);
     } catch (error) {
