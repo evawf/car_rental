@@ -13,23 +13,23 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT,
       },
-      phoneNo: {
+      phone_no: {
         allowNull: false,
         type: Sequelize.TEXT,
       },
-      pickupLocation: {
+      pickup_location: {
         allowNull: false,
         type: Sequelize.TEXT,
       },
-      startDate: {
+      start_date: {
         allowNull: false,
         type: Sequelize.TEXT,
       },
-      endDate: {
+      end_date: {
         allowNull: false,
         type: Sequelize.TEXT,
       },
-      carId: {
+      car_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },

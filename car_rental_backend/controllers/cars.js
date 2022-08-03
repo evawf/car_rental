@@ -22,7 +22,6 @@ class Cars extends Base {
     try {
       const { id } = req.params;
       const getCurrentCar = await this.model.findByPk(id);
-      console.log("current car: ", getCurrentCar);
       if (getCurrentCar) {
         res.json({ car: getCurrentCar });
       } else {

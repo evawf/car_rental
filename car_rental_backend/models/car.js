@@ -28,11 +28,11 @@ const initCarModel = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.DECIMAL,
       },
-      created_at: {
+      createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
       },
-      updated_at: {
+      updatedAt: {
         allowNull: false,
         type: DataTypes.DATE,
       },
