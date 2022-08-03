@@ -6,7 +6,12 @@ class CarsRouter {
     this.controller = controller;
   }
   router() {
-    router.get("/cars", this.controller.getCars.bind(this.controller));
+    router
+      .get(
+        "/availableCars",
+        this.controller.getAvailableCars.bind(this.controller)
+      )
+      .get("/cars/:id", this.controller.getCurrentCar.bind(this.controller));
 
     return router;
   }
