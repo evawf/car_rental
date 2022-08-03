@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 // import CarsContext from "../providers/CarsContext";
 // import { Link } from "react-router-dom";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 // make sure that axios always sends the cookies to the backend server
 axios.defaults.withCredentials = true;
@@ -14,12 +15,11 @@ const BACKEND_URL =
 export default function Car() {
   const { id } = useParams();
   const [currentCar, setCurrentCar] = useState();
-  const initBooking = {
-    carId: id,
-    email: "",
-    phone: "",
-  };
-  const [bookingInfo, setBookingInfo] = useState(initBooking);
+  let newDate = new Date();
+
+  const [userEmail, setUserEmail] = useState("");
+  const [userPhone, setUserPhone] = useState("");
+  // const [showMsg, setShowMsg] = useState(false);
   // const allCarsList = useContext(CarsContext);
 
   // const currentCar = allCarsList.filter(
@@ -35,8 +35,31 @@ export default function Car() {
     getCurrentCar();
   }, []);
 
-  const handleSubmit = () => {
-    console.log("submit done!");
+  const handleSubmit = async () => {
+    const bookingInfo = {
+      carId: Number(id),
+      email: userEmail,
+      phoneNo: userPhone,
+      startDate: newDate.getDate() + "/" + (newDate.getMonth() + 1),
+      endDate: newDate.getDate() + "/" + (newDate.getMonth() + 1),
+      pickupLocation: "Changi Airport",
+    };
+
+    try {
+      if (userEmail && userPhone) {
+        const result = await axios.post(`${BACKEND_URL}/booking`, bookingInfo);
+        if (result.data === "Booking success!") {
+          alert("Booking Success!");
+          return <Navigate to="/Bookings" replace={true} />;
+        } else {
+          alert("Booking failed!");
+        }
+      } else {
+        alert("Please input your contact info!");
+      }
+    } catch (error) {
+      console.log("Error message: ", error);
+    }
   };
 
   return (
@@ -52,22 +75,27 @@ export default function Car() {
         </div>
       )}
       <p>Please input your contact info to book: </p>
-      <form
-        onSubmit={handleSubmit}
-        style={{ display: "flex", flexDirection: "column", width: "250px" }}
-      >
+      <div style={{ display: "flex", flexDirection: "column", width: "250px" }}>
         <label>Your Email</label>
         <input
-          value={bookingInfo.email}
-          onChange={(e) => setBookingInfo({ email: e.target.value })}
+          type="email"
+          value={userEmail}
+          onChange={(e) => {
+            setUserEmail(e.target.value);
+          }}
         />
         <label>Your Contact No.</label>
         <input
-          value={bookingInfo.phone}
-          onChange={(e) => setBookingInfo({ phone: e.target.value })}
+          type="number"
+          value={userPhone}
+          onChange={(e) => {
+            setUserPhone(e.target.value);
+          }}
         />
-        <button>Book</button>
-      </form>
+        <button type="button" onClick={handleSubmit}>
+          Book
+        </button>
+      </div>
       {/* <Link to={`/cars/${currentCar.id}/book`}>Book</Link> */}
     </div>
   );

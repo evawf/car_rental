@@ -8,12 +8,10 @@ const BACKEND_URL =
   process.env.REACT_APP_CAR_RENTAL_BACKEND_URL || "http://localhost:3004";
 
 export default function SearchForm({ setCarsList, setShowCarsList }) {
-  const initalVal = {
-    pickupLocation: "",
-    pickupDate: "",
-    dropoffDate: "",
-  };
-  const [searchParams, setSearchParams] = useState(initalVal);
+  const [pickupLocation, setPickupLocation] = useState("Changi Airport");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+
   const handleSubmit = async () => {
     try {
       const result = await axios.get(`${BACKEND_URL}/availableCars`);
@@ -37,25 +35,25 @@ export default function SearchForm({ setCarsList, setShowCarsList }) {
       <input
         type="location"
         placeholder="Pick-up Location"
-        value={(searchParams.pickupLocation = "Changi Airport")}
+        value={pickupLocation}
         onChange={(e) => {
-          setSearchParams({ pickupLocation: e.target.value });
+          setPickupLocation(e.target.value);
         }}
       />
       <label>Start Date</label>
       <input
         type="date"
-        value={searchParams.pickupDate}
+        value={startDate}
         onChange={(e) => {
-          setSearchParams({ pickupDate: e.target.value });
+          setStartDate(e.target.value);
         }}
       />
       <label>End Date</label>
       <input
         type="date"
-        value={searchParams.dropoffDate}
+        value={endDate}
         onChange={(e) => {
-          setSearchParams({ dropoffDate: e.target.value });
+          setEndDate(e.target.value);
         }}
       />
       <button type="button" onClick={handleSubmit}>
