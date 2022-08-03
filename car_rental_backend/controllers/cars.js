@@ -1,4 +1,6 @@
 const Base = require("./base");
+const { Booking } = require("../models");
+const { Op } = require("sequelize");
 
 class Cars extends Base {
   constructor(model) {
@@ -6,8 +8,32 @@ class Cars extends Base {
   }
 
   async getAvailableCars(req, res) {
+    const { searchedStartDate, searchedEndDate } = req.query;
+    console.log("start date: ", searchedStartDate);
+    console.log("end date: ", searchedEndDate);
+
     try {
-      const getCars = await this.model.findAll();
+      const getAllcars = await this.model.findAll();
+      const getCars = await this.model.findAll({
+        include: {
+          model: Booking,
+          where: {
+            [Op.or]: [
+              {
+                startDate: {
+                  [Op.notBetween]: [searchedStartDate, searchedEndDate],
+                },
+              },
+              {
+                endDate: {
+                  [Op.notBetween]: [searchedStartDate, searchedEndDate],
+                },
+              },
+            ],
+          },
+        },
+      });
+
       if (getCars) {
         res.json({ cars: getCars });
       } else {
