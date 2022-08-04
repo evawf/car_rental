@@ -13,12 +13,12 @@ class Cars extends Base {
     console.log("end date: ", searchedEndDate);
 
     try {
-      const getAllcars = await this.model.findAll();
-      const getCars = await this.model.findAll({
+      const getAvailableCars = await this.model.findAll({
         include: {
+          required: false,
           model: Booking,
           where: {
-            [Op.or]: [
+            [Op.and]: [
               {
                 startDate: {
                   [Op.notBetween]: [searchedStartDate, searchedEndDate],
@@ -34,8 +34,8 @@ class Cars extends Base {
         },
       });
 
-      if (getCars) {
-        res.json({ cars: getCars });
+      if (getAvailableCars) {
+        res.json({ cars: getAvailableCars });
       } else {
         res.send("No available car.");
       }

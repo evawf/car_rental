@@ -14,9 +14,15 @@ export default function SearchForm({ setCarsList, setShowCarsList }) {
 
   const handleSubmit = async () => {
     try {
-      const result = await axios.get(`${BACKEND_URL}/availableCars`);
-      setCarsList(result.data.cars);
-      setShowCarsList(true);
+      const result = await axios.get(`${BACKEND_URL}/availableCars`, {
+        params: { searchedStartDate: startDate, searchedEndDate: endDate },
+      });
+      if (result.data) {
+        setCarsList(result.data.cars);
+        setShowCarsList(true);
+      } else {
+        alert("Sorry, no available car!");
+      }
     } catch (error) {
       console.log("Error message: ", error);
     }
