@@ -5,7 +5,6 @@ import Home from "./routes/Home.js";
 import Bookings from "./routes/Bookings.js";
 import About from "./routes/About.js";
 import Car from "./routes/Car.js";
-import Book from "./routes/Book.js";
 import NotFound from "./routes/NotFound.js";
 
 function App() {
@@ -16,7 +15,6 @@ function App() {
         <Route path="/Bookings" element={<Bookings />} />
         <Route path="/About" element={<About />} />
         <Route path="/cars/:id" element={<Car />} />
-        <Route path="/cars/:id/book" element={<Book />}></Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

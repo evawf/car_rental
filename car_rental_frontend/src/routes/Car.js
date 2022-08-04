@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
-// import CarsContext from "../providers/CarsContext";
-// import { Link } from "react-router-dom";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 
@@ -19,13 +17,6 @@ export default function Car() {
 
   const [userEmail, setUserEmail] = useState("");
   const [userPhone, setUserPhone] = useState("");
-  // const [showMsg, setShowMsg] = useState(false);
-  // const allCarsList = useContext(CarsContext);
-
-  // const currentCar = allCarsList.filter(
-  //   (car) => Number(car.id) === Number(id)
-  // )[0];
-  // console.log("all cars: ", allCarsList);
 
   useEffect(() => {
     const getCurrentCar = async () => {
