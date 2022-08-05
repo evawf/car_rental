@@ -13,7 +13,7 @@ const BACKEND_URL =
 export default function Car() {
   const { id } = useParams();
   const [currentCar, setCurrentCar] = useState();
-  let newDate = new Date();
+  // let newDate = new Date();
 
   const [userEmail, setUserEmail] = useState("");
   const [userPhone, setUserPhone] = useState("");
@@ -31,8 +31,8 @@ export default function Car() {
       carId: Number(id),
       email: userEmail,
       phoneNo: userPhone,
-      startDate: newDate.getDate() + "/" + (newDate.getMonth() + 1),
-      endDate: newDate.getDate() + "/" + (newDate.getMonth() + 1),
+      startDate: localStorage.getItem("startDate"),
+      endDate: localStorage.getItem("endDate"),
       pickupLocation: "Changi Airport",
     };
 

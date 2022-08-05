@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 // make sure that axios always sends the cookies to the backend server
@@ -9,8 +9,29 @@ const BACKEND_URL =
 
 export default function SearchForm({ setCarsList, setShowCarsList }) {
   const [pickupLocation, setPickupLocation] = useState("Changi Airport");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  // const [startDate, setStartDate] = useState("");
+  // const [endDate, setEndDate] = useState("");
+
+  const [startDate, setStartDate] = useState(() => {
+    const storedStartDate = localStorage.getItem("startDate");
+    // const initStartDate = JSON.parse(storedStartDate);
+    // return initStartDate || "";
+    return storedStartDate;
+  });
+
+  const [endDate, setEndDate] = useState(() => {
+    const storedEndDate = localStorage.getItem("endDate");
+    // const initEndDate = JSON.parse(storedEndDate);
+    // return initEndDate || "";
+    return storedEndDate;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("startDate", startDate);
+    localStorage.setItem("endDate", endDate);
+  }, [startDate, endDate]);
+
+  console.log(startDate);
 
   const handleSubmit = async () => {
     try {
