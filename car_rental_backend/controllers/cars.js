@@ -9,33 +9,60 @@ class Cars extends Base {
 
   async getAvailableCars(req, res) {
     const { searchedStartDate, searchedEndDate } = req.query;
-    console.log("start date: ", searchedStartDate);
-    console.log("end date: ", searchedEndDate);
 
     try {
-      const getAvailableCars = await this.model.findAll({
+      const allCars = await this.model.findAll();
+      const bookedCars = await this.model.findAll({
+        order: [["id", "ASC"]],
         include: {
-          required: false,
+          required: true,
           model: Booking,
           where: {
-            [Op.and]: [
+            [Op.not]: [
               {
-                startDate: {
-                  [Op.notBetween]: [searchedStartDate, searchedEndDate],
-                },
-              },
-              {
-                endDate: {
-                  [Op.notBetween]: [searchedStartDate, searchedEndDate],
-                },
+                [Op.or]: [
+                  {
+                    [Op.and]: [
+                      {
+                        startDate: {
+                          [Op.gt]: searchedEndDate,
+                        },
+                      },
+                      {
+                        endDate: {
+                          [Op.gt]: searchedEndDate,
+                        },
+                      },
+                    ],
+                  },
+                  {
+                    [Op.and]: [
+                      {
+                        startDate: {
+                          [Op.lt]: searchedStartDate,
+                        },
+                      },
+                      {
+                        endDate: {
+                          [Op.lt]: searchedStartDate,
+                        },
+                      },
+                    ],
+                  },
+                ],
               },
             ],
           },
         },
       });
 
-      if (getAvailableCars) {
-        res.json({ cars: getAvailableCars });
+      const availableCars = allCars.filter((c) => {
+        bookedCars.forEach((car) => car.id === c.id);
+      });
+      console.log("available cars: ", availableCars);
+
+      if (availableCars) {
+        res.json({ cars: availableCars });
       } else {
         res.send("No available car.");
       }

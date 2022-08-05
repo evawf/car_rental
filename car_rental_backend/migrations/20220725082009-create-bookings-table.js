@@ -23,11 +23,11 @@ module.exports = {
       },
       start_date: {
         allowNull: false,
-        type: Sequelize.TEXT,
+        type: Sequelize.DATE,
       },
       end_date: {
         allowNull: false,
-        type: Sequelize.TEXT,
+        type: Sequelize.DATE,
       },
       car_id: {
         allowNull: false,

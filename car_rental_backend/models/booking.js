@@ -22,11 +22,11 @@ const initBookingModel = (sequelize, DataTypes) => {
       },
       startDate: {
         allowNull: false,
-        type: DataTypes.TEXT,
+        type: DataTypes.DATE,
       },
       endDate: {
         allowNull: false,
-        type: DataTypes.TEXT,
+        type: DataTypes.DATE,
       },
       carId: {
         allowNull: false,

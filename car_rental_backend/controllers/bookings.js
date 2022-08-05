@@ -23,6 +23,7 @@ class Bookings extends Base {
 
   async postBooking(req, res) {
     const bookingInfo = req.body;
+    console.log("booking info:", bookingInfo);
     try {
       const result = await this.model.create(bookingInfo);
       console.log("add booking", result);
