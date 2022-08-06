@@ -1,14 +1,15 @@
+import { useContext } from "react";
+import { TodosContext } from "../providers/ToDoProvider";
+// import { updateAction, cancelAction } from "../reducer/toDoReducer";
+
 export default function Confirmation() {
+  const { bookingList: booking } = useContext(TodosContext);
+
+  console.log("my booking: ", booking);
+
   return (
     <div>
-      <div>Car details</div>
-      <h4>Please Input your email and phone numbe to confirm booking!</h4>
-      <form>
-        <input placeholder="Your Email" />
-        <input placeholder="Your Phone No." />
-        <button>Confirm</button>
-        <button>Cancel</button>
-      </form>
+      <div>Booking Confirmation</div>
     </div>
   );
 }

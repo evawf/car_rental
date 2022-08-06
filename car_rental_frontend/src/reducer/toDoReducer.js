@@ -1,6 +1,6 @@
-import axios from "axios";
+// import axios from "axios";
 
-export const initialState = [];
+export const initialState = { bookings: [] };
 
 const BOOK = "BOOK";
 const UPDATE = "UPDATE";
@@ -9,18 +9,27 @@ const CANCEL = "CANCEL";
 export function toDoReducer(state, action) {
   switch (action.type) {
     case BOOK:
-      return [...state, action.payload.bookingDetails];
+      return {
+        ...state,
+        bookings: [...state.bookings, action.payload.booking],
+      };
     case UPDATE:
-      return state.map((booking, i) => {
+      const newBookings = state.bookings.map((booking, i) => {
         if (i === action.payload.bookingId) {
           booking = action.payload.bookingDetails;
         }
         return booking;
       });
+      return { ...state, bookings: newBookings };
     case CANCEL:
-      return state.filter((_booking, i) => action.payload.bookingId !== i);
+      return {
+        ...state,
+        bookings: state.bookings.filter(
+          (_booking, i) => action.payload.bookingId !== i
+        ),
+      };
     default:
-      return state;
+      throw new Error("Action does not exist");
   }
 }
 
@@ -28,7 +37,7 @@ export const bookAction = async (bookingDetails) => {
   return {
     type: BOOK,
     payload: {
-      bookingDetails,
+      booking: bookingDetails,
     },
   };
 };

@@ -6,17 +6,20 @@ import Bookings from "./routes/Bookings.js";
 import About from "./routes/About.js";
 import Car from "./routes/Car.js";
 import NotFound from "./routes/NotFound.js";
+import ToDoProvider from "./providers/ToDoProvider";
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/Bookings" element={<Bookings />} />
-        <Route path="/About" element={<About />} />
-        <Route path="/cars/:id" element={<Car />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <ToDoProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/Bookings" element={<Bookings />} />
+          <Route path="/About" element={<About />} />
+          <Route path="/cars/:id" element={<Car />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </ToDoProvider>
     </Router>
   );
 }
