@@ -4,19 +4,10 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { CardActionArea, CardActions } from "@mui/material";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
-import { Link } from "react-router-dom";
 
-// import {
-//   addBookingAction,
-//   updateBookingAction,
-//   cancelBookingAction,
-// } from "../todo.js";
-// import { useState } from "react";
-// import Box from "@mui/material/Box";
-// import CardMedia from "@mui/material/CardMedia";
-
-export default function Cars({ carsList }) {
-  return (
+export default function Cars({ carsList, setSelectedCarId }) {
+  console.log("car list:", carsList);
+  return carsList.length ? (
     <div
       style={{
         display: "flex",
@@ -63,10 +54,12 @@ export default function Cars({ carsList }) {
               alignItems: "center",
             }}
           >
-            <Link to={`/cars/${car.id}`}>View Deal</Link>
+            <button onClick={setSelectedCarId(idx)}>View Deal</button>
           </CardActions>
         </Card>
       ))}
     </div>
+  ) : (
+    <div>Please choose your start date and end date!</div>
   );
 }

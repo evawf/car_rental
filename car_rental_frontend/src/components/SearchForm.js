@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import axios from "axios";
 
 // make sure that axios always sends the cookies to the backend server
@@ -7,40 +7,27 @@ axios.defaults.withCredentials = true;
 const BACKEND_URL =
   process.env.REACT_APP_CAR_RENTAL_BACKEND_URL || "http://localhost:3004";
 
-export default function SearchForm({ setCarsList, setShowCarsList }) {
-  const [pickupLocation, setPickupLocation] = useState("Changi Airport");
-  // const [startDate, setStartDate] = useState("");
-  // const [endDate, setEndDate] = useState("");
-
-  const [startDate, setStartDate] = useState(() => {
-    const storedStartDate = localStorage.getItem("startDate");
-    // const initStartDate = JSON.parse(storedStartDate);
-    // return initStartDate || "";
-    return storedStartDate;
-  });
-
-  const [endDate, setEndDate] = useState(() => {
-    const storedEndDate = localStorage.getItem("endDate");
-    // const initEndDate = JSON.parse(storedEndDate);
-    // return initEndDate || "";
-    return storedEndDate;
-  });
-
-  useEffect(() => {
-    localStorage.setItem("startDate", startDate);
-    localStorage.setItem("endDate", endDate);
-  }, [startDate, endDate]);
-
-  console.log(startDate);
+export default function SearchForm({
+  setCarsList,
+  setStartDate,
+  setEndDate,
+  setPickupLocation,
+}) {
+  let startDate, endDate, pickupLocation;
+  // const [pickupLocation, setPickupLocation] = useState("Changi Airport");
 
   const handleSubmit = async () => {
     try {
+      console.log(`startDate: ${startDate}, endDate: ${endDate}`);
+      setStartDate(startDate);
+      setEndDate(endDate);
+      setPickupLocation(pickupLocation);
       const result = await axios.get(`${BACKEND_URL}/availableCars`, {
         params: { searchedStartDate: startDate, searchedEndDate: endDate },
       });
+      console.log(result.data);
       if (result.data) {
         setCarsList(result.data.cars);
-        setShowCarsList(true);
       } else {
         alert("Sorry, no available car!");
       }
@@ -62,9 +49,9 @@ export default function SearchForm({ setCarsList, setShowCarsList }) {
       <input
         type="location"
         placeholder="Pick-up Location"
-        value={pickupLocation}
+        value={"Changi Airport"}
         onChange={(e) => {
-          setPickupLocation(e.target.value);
+          pickupLocation = e.target.value;
         }}
       />
       <label>Start Date</label>
@@ -72,7 +59,7 @@ export default function SearchForm({ setCarsList, setShowCarsList }) {
         type="date"
         value={startDate}
         onChange={(e) => {
-          setStartDate(e.target.value);
+          startDate = e.target.value;
         }}
       />
       <label>End Date</label>
@@ -80,7 +67,7 @@ export default function SearchForm({ setCarsList, setShowCarsList }) {
         type="date"
         value={endDate}
         onChange={(e) => {
-          setEndDate(e.target.value);
+          endDate = e.target.value;
         }}
       />
       <button type="button" onClick={handleSubmit}>
