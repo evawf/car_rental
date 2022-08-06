@@ -55,9 +55,16 @@ class Cars extends Base {
           },
         },
       });
+      console.log("booked cars: ", bookedCars);
 
       const availableCars = allCars.filter((c) => {
-        bookedCars.forEach((car) => car.id === c.id);
+        for (let i = 0; i < bookedCars.length; i++) {
+          if (c.id === bookedCars[i].id) {
+            return false;
+          } else {
+            return true;
+          }
+        }
       });
       console.log("available cars: ", availableCars);
 
