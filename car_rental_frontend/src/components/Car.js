@@ -9,9 +9,9 @@ const BACKEND_URL =
 
 export default function Car({ selectedCarId, setShowBookingForm }) {
   const [currentCar, setCurrentCar] = useState();
-
+  console.log("car id: ", selectedCarId);
   useEffect(() => {
-    console.log("start date: ", localStorage.getItem("startDate"));
+    // console.log("start date: ", localStorage.getItem("startDate"));
     const getCurrentCar = async () => {
       const result = await axios.get(`${BACKEND_URL}/cars/${selectedCarId}`);
       setCurrentCar(result.data.car);
@@ -21,6 +21,7 @@ export default function Car({ selectedCarId, setShowBookingForm }) {
 
   return (
     <div>
+      <p>Single Car Page</p>
       {currentCar && (
         <div>
           <h2>Car details: {selectedCarId}</h2>

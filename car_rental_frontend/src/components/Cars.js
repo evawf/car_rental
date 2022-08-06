@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea, CardActions } from "@mui/material";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 
-export default function Cars({ carsList, setSelectedCarId }) {
+export default function Cars({ carsList, setSelectedCarId, setShowSingleCar }) {
   console.log("car list:", carsList);
   return carsList.length ? (
     <div
@@ -54,7 +54,14 @@ export default function Cars({ carsList, setSelectedCarId }) {
               alignItems: "center",
             }}
           >
-            <button onClick={setSelectedCarId(idx)}>View Deal</button>
+            <button
+              onClick={() => {
+                setSelectedCarId(car.id);
+                setShowSingleCar(true);
+              }}
+            >
+              View Deal
+            </button>
           </CardActions>
         </Card>
       ))}

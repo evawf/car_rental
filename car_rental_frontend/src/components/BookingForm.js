@@ -2,7 +2,12 @@ import { useState, useContext } from "react";
 import { TodosContext } from "../providers/ToDoProvider";
 import { bookAction } from "../reducer/toDoReducer";
 
-export default function BookingForm({ startDate, endDate, selectedCarId }) {
+export default function BookingForm({
+  startDate,
+  endDate,
+  selectedCarId,
+  setShowConfirmation,
+}) {
   const [userEmail, setUserEmail] = useState("");
   const [userPhone, setUserPhone] = useState("");
   const { ToDoDispatch: dispatch } = useContext(TodosContext);
@@ -17,7 +22,9 @@ export default function BookingForm({ startDate, endDate, selectedCarId }) {
       endDate: endDate,
       pickupLocation: "Changi Airport",
     };
+    console.log("booking info: ", bookingInfo);
     dispatch(await bookAction(bookingInfo));
+    setShowConfirmation(true);
   };
 
   return (
