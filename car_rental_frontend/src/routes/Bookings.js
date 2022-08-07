@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-// import { TodosContext } from "../providers/ToDoProvider";
-// import { cancelAction } from "../reducer/toDoReducer";
 
 // make sure that axios always sends the cookies to the backend server
 import axios from "axios";
@@ -12,9 +10,6 @@ const BACKEND_URL =
 export default function Bookings() {
   const [email, setEmail] = useState("");
   const [myBookingList, setMyBookingList] = useState([]);
-  // const { ToDoDispatch: dispatch } = useContext(TodosContext);
-  // const { bookingList: bookings } = useContext(TodosContext);
-  // const [selectedBookingId, setSelectedBookingId] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,13 +57,13 @@ export default function Bookings() {
             {myBookingList &&
               myBookingList.map((booking, idx) => (
                 <li key={idx}>
-                  <p>Booking ID: {booking.id}</p>
+                  <p>My booking ID: {booking.id}</p>
                   <p>Pickup Location: {booking.pickupLocation}</p>
                   <p>Start Date: {booking.startDate}</p>
+                  <p>Model Name: {booking.car.model}</p>
                   <p>End Date: {booking.endDate}</p>
                   <button
                     onClick={() => {
-                      // setSelectedBookingId(booking.id);
                       handleCancel(booking.id);
                     }}
                   >
