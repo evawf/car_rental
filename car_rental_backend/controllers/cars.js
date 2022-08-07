@@ -60,7 +60,6 @@ class Cars extends Base {
       });
 
       console.log("booked cars: ", bookedCars);
-      console.log("all cars:", allCars);
 
       const availableCars = allCars.filter((c) => {
         if (bookedCars.length) {
