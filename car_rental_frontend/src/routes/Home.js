@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SearchForm from "../components/SearchForm.js";
 import Cars from "../components/Cars.js";
 import Navbar from "../components/Navbar";
 import Car from "../components/Car";
 import BookingForm from "../components/BookingForm.js";
 import Confirmation from "../components/Confirmation.js";
+import axios from "axios";
+
+// make sure that axios always sends the cookies to the backend server
+axios.defaults.withCredentials = true;
+
+const BACKEND_URL =
+  process.env.REACT_APP_CAR_RENTAL_BACKEND_URL || "http://localhost:3004";
 
 export default function Home() {
   const [carsList, setCarsList] = useState([]);
@@ -17,7 +24,16 @@ export default function Home() {
   const [showSingleCar, setShowSingleCar] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
 
-  // states : car list / selectedcar
+  const [currentCar, setCurrentCar] = useState();
+  console.log("car id: ", selectedCarId);
+  useEffect(() => {
+    const getCurrentCar = async () => {
+      const result = await axios.get(`${BACKEND_URL}/cars/${selectedCarId}`);
+      setCurrentCar(result.data.car);
+    };
+    getCurrentCar();
+  }, [selectedCarId]);
+
   return (
     <div>
       <div>{carsList.length}</div>
@@ -43,6 +59,7 @@ export default function Home() {
             <Car
               selectedCarId={selectedCarId}
               setShowBookingForm={setShowBookingForm}
+              currentCar={currentCar}
             />
           ) : (
             <div>
@@ -55,7 +72,7 @@ export default function Home() {
                   setShowConfirmation={setShowConfirmation}
                 />
               ) : (
-                <Confirmation />
+                <Confirmation currentCar={currentCar} />
               )}
             </div>
           )}
