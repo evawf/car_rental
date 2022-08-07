@@ -10,10 +10,9 @@ const BACKEND_URL =
 export default function Confirmation({ currentCar }) {
   const { bookingList: bookings } = useContext(TodosContext);
   let navigate = useNavigate();
+  let booking = bookings[0];
+  console.log("booking confirmation: ", booking);
 
-  let booking = bookings.pop();
-  console.log("my booking: ", booking);
-  console.log("current car: ", currentCar);
   const handleConfirm = async () => {
     try {
       if (booking) {
@@ -21,7 +20,6 @@ export default function Confirmation({ currentCar }) {
         if (result.data === "Booking success!") {
           alert("Booking Success!");
           navigate("/Bookings", { replace: true });
-          //return <Navigate to="/Bookings" replace={true} />;
         } else {
           alert("Booking failed!");
         }

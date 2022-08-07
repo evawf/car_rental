@@ -22,7 +22,6 @@ export default function BookingForm({
       endDate: endDate,
       pickupLocation: "Changi Airport",
     };
-    console.log("booking info: ", bookingInfo);
     dispatch(await bookAction(bookingInfo));
     setShowConfirmation(true);
   };

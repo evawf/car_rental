@@ -12,8 +12,8 @@ export default function SearchForm({
   setPickupLocation,
 }) {
   let pickupLocation;
-  const [startDate, setStateStartDate] = useState(null);
-  const [endDate, setStateEndDate] = useState(null);
+  const [startDate, setStateStartDate] = useState(new Date());
+  const [endDate, setStateEndDate] = useState(new Date());
 
   const handleSubmit = async () => {
     console.log(`startDate: ${startDate}, endDate: ${endDate}`);

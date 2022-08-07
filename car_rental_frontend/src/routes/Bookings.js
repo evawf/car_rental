@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
+// import { TodosContext } from "../providers/ToDoProvider";
+// import { cancelAction } from "../reducer/toDoReducer";
+
 // make sure that axios always sends the cookies to the backend server
 import axios from "axios";
 axios.defaults.withCredentials = true;
@@ -8,7 +11,10 @@ const BACKEND_URL =
 
 export default function Bookings() {
   const [email, setEmail] = useState("");
-  const [bookingList, setBookingList] = useState([]);
+  const [myBookingList, setMyBookingList] = useState([]);
+  // const { ToDoDispatch: dispatch } = useContext(TodosContext);
+  // const { bookingList: bookings } = useContext(TodosContext);
+  // const [selectedBookingId, setSelectedBookingId] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,9 +23,22 @@ export default function Bookings() {
         params: { email: email },
       });
       console.log("result data: ", result.data);
-      if (result.data) {
-        setBookingList(result.data.bookings);
+      if (result.data.bookings.length) {
+        setMyBookingList(result.data.bookings);
+      } else {
+        alert("You haven't booked a car yet!");
       }
+    } catch (error) {
+      console.log("Error message: ", error);
+    }
+  };
+
+  const handleCancel = async (id) => {
+    console.log("selected booking id: ", id);
+    setMyBookingList(myBookingList.filter((booking) => booking.id !== id));
+    try {
+      const result = await axios.delete(`${BACKEND_URL}/myBookings/${id}`);
+      console.log("delete result: ", result.data);
     } catch (error) {
       console.log("Error message: ", error);
     }
@@ -29,28 +48,35 @@ export default function Bookings() {
     <>
       <main>
         <Navbar />
-        <h2>Manage Your Bookings</h2>
-        <p>Please input your email: </p>
         <div>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <button type="button" onClick={handleSubmit}>
-            Search
-          </button>
-          {bookingList &&
-            bookingList.map((booking, i) => (
-              <li key={i}>
-                <p>Booking ID: {booking.id}</p>
-                <p>Pickup Location: {booking.pickupLocation}</p>
-                <p>Start Date: {booking.startDate}</p>
-                <p>End Date: {booking.endDate}</p>
-                <button>Update</button>
-                <button>Cancel</button>
-              </li>
-            ))}
+          <p>Please input email to view all your bookings: </p>
+          <div>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <button type="button" onClick={handleSubmit}>
+              Search
+            </button>
+            {myBookingList &&
+              myBookingList.map((booking, idx) => (
+                <li key={idx}>
+                  <p>Booking ID: {booking.id}</p>
+                  <p>Pickup Location: {booking.pickupLocation}</p>
+                  <p>Start Date: {booking.startDate}</p>
+                  <p>End Date: {booking.endDate}</p>
+                  <button
+                    onClick={() => {
+                      // setSelectedBookingId(booking.id);
+                      handleCancel(booking.id);
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </li>
+              ))}
+          </div>
         </div>
       </main>
     </>
