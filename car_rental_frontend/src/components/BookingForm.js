@@ -7,10 +7,21 @@ export default function BookingForm({
   endDate,
   selectedCarId,
   setShowConfirmation,
+  currentCar,
 }) {
   const [userEmail, setUserEmail] = useState("");
   const [userPhone, setUserPhone] = useState("");
   const { ToDoDispatch: dispatch } = useContext(TodosContext);
+
+  const dayDiff = Math.floor(
+    (new Date(endDate) - new Date(startDate)) / 86400000
+  );
+
+  console.log("start date:", startDate);
+  console.log("end date: ", endDate);
+  console.log("price per day: ", currentCar.price);
+  console.log("renting days: ", dayDiff);
+  console.log("total: ", dayDiff * currentCar.price);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +30,9 @@ export default function BookingForm({
       email: userEmail,
       phoneNo: userPhone,
       startDate: startDate,
+      total: dayDiff * currentCar.price,
       endDate: endDate,
+      // total: currentCar.price * (endDate - startDate),
       pickupLocation: "Changi Airport",
     };
     dispatch(await bookAction(bookingInfo));

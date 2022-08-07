@@ -57,11 +57,12 @@ export default function Bookings() {
             {myBookingList &&
               myBookingList.map((booking, idx) => (
                 <li key={idx}>
-                  <p>My booking ID: {booking.id}</p>
+                  <p>My Booking Number: {booking.id}</p>
                   <p>Pickup Location: {booking.pickupLocation}</p>
                   <p>Start Date: {booking.startDate}</p>
-                  <p>Model Name: {booking.car.model}</p>
                   <p>End Date: {booking.endDate}</p>
+                  <p>Model Name: {booking.car.model}</p>
+                  <p>Total Price: ${booking.total}</p>
                   <button
                     onClick={() => {
                       handleCancel(booking.id);

@@ -25,14 +25,6 @@ export default function Navbar() {
             Bookings
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/About"
-            style={{ textDecoration: "none", color: "white" }}
-          >
-            About
-          </NavLink>
-        </li>
       </ul>
     </nav>
   );

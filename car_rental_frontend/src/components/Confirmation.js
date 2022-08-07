@@ -42,6 +42,7 @@ export default function Confirmation({ currentCar }) {
         <p>Model: {currentCar.model}</p>
         <p>Type: {currentCar.type}</p>
         <p>Price: ${currentCar.price} / Day</p>
+        <p>Total Cost: ${booking.total}</p>
         <h2>My Contact Info: </h2>
         <p>Email: {booking.email}</p>
         <p>Phone number: {booking.phoneNo}</p>

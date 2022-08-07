@@ -65,6 +65,7 @@ export default function Home() {
                   selectedCarId={selectedCarId}
                   pickupLocation={pickupLocation}
                   setShowConfirmation={setShowConfirmation}
+                  currentCar={currentCar}
                 />
               ) : (
                 <Confirmation currentCar={currentCar} />
