@@ -28,6 +28,10 @@ const initBookingModel = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.DATE,
       },
+      total: {
+        allowNull: true,
+        type: DataTypes.DECIMAL(10, 2),
+      },
       carId: {
         allowNull: false,
         type: DataTypes.INTEGER,
