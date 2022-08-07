@@ -1,13 +1,34 @@
 import { useContext } from "react";
 import { TodosContext } from "../providers/ToDoProvider";
-// import { updateAction, cancelAction } from "../reducer/toDoReducer";
+import { Navigate } from "react-router-dom";
+// make sure that axios always sends the cookies to the backend server
+import axios from "axios";
+axios.defaults.withCredentials = true;
+const BACKEND_URL =
+  process.env.REACT_APP_CAR_RENTAL_BACKEND_URL || "http://localhost:3004";
 
 export default function Confirmation({ currentCar }) {
   const { bookingList: bookings } = useContext(TodosContext);
   let booking = bookings.pop();
   console.log("my booking: ", booking);
   console.log("current car: ", currentCar);
-  const handleConfirm = () => {};
+  const handleConfirm = async () => {
+    try {
+      if (booking) {
+        const result = await axios.post(`${BACKEND_URL}/booking`, booking);
+        if (result.data === "Booking success!") {
+          alert("Booking Success!");
+          return <Navigate to="/Bookings" replace={true} />;
+        } else {
+          alert("Booking failed!");
+        }
+      } else {
+        alert("Please input your contact info!");
+      }
+    } catch (error) {
+      console.log("Error message: ", error);
+    }
+  };
 
   return (
     <div>

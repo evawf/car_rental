@@ -20,8 +20,8 @@ export default function Home() {
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [showSingleCar, setShowSingleCar] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
-
   const [currentCar, setCurrentCar] = useState();
+
   console.log("car id: ", selectedCarId);
   useEffect(() => {
     const getCurrentCar = async () => {
