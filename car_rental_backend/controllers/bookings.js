@@ -12,9 +12,9 @@ class Bookings extends Base {
       const result = await this.model.findAll({ where: { email: email } });
       console.log("my booking: ", result);
       if (result) {
-        res.json({ bookings: result });
+        return res.json({ bookings: result });
       } else {
-        res.send("You have no booking.");
+        return res.send("You have no booking.");
       }
     } catch (error) {
       console.log("Error message: ", error);
@@ -28,10 +28,24 @@ class Bookings extends Base {
       const result = await this.model.create(bookingInfo);
       console.log("add booking", result);
       if (result) {
-        res.send("Booking success!");
+        return res.send("Booking success!");
       } else {
-        res.send("Booking failed!");
+        return res.send("Booking failed!");
       }
+    } catch (error) {
+      console.log("Error message: ", error);
+    }
+  }
+
+  async deleteBooking(req, res) {
+    const { id } = req.params;
+    console.log("booking id :", id);
+    try {
+      const result = await this.model.findByPk(id);
+      console.log("booking info: ", result);
+      result.destroy();
+      // result.save();
+      return res.send("Booking deleted!");
     } catch (error) {
       console.log("Error message: ", error);
     }

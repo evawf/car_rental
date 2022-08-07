@@ -8,7 +8,11 @@ class BookingsRouter {
   router() {
     router
       .get("/myBookings", this.controller.getMyBookings.bind(this.controller))
-      .post("/booking", this.controller.postBooking.bind(this.controller));
+      .post("/booking", this.controller.postBooking.bind(this.controller))
+      .delete(
+        "/mybookings/:id",
+        this.controller.deleteBooking.bind(this.controller)
+      );
     return router;
   }
 }
