@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import Car from "../components/Car";
 import BookingForm from "../components/BookingForm.js";
 import Confirmation from "../components/Confirmation.js";
+
 // make sure that axios always sends the cookies to the backend server
 import axios from "axios";
 axios.defaults.withCredentials = true;

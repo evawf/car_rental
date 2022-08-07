@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // make sure that axios always sends the cookies to the backend server
 import axios from "axios";
 axios.defaults.withCredentials = true;
@@ -11,25 +11,29 @@ export default function SearchForm({
   setEndDate,
   setPickupLocation,
 }) {
-  let startDate, endDate, pickupLocation;
+  let pickupLocation;
+  const [startDate, setStateStartDate] = useState(null);
+  const [endDate, setStateEndDate] = useState(null);
 
   const handleSubmit = async () => {
-    try {
-      console.log(`startDate: ${startDate}, endDate: ${endDate}`);
-      setStartDate(startDate);
-      setEndDate(endDate);
-      setPickupLocation(pickupLocation);
-      const result = await axios.get(`${BACKEND_URL}/availableCars`, {
-        params: { searchedStartDate: startDate, searchedEndDate: endDate },
-      });
-      console.log(result.data);
-      if (result.data) {
-        setCarsList(result.data.cars);
-      } else {
-        alert("Sorry, no available car!");
+    console.log(`startDate: ${startDate}, endDate: ${endDate}`);
+    setStartDate(startDate);
+    setEndDate(endDate);
+    setPickupLocation(pickupLocation);
+    if (startDate !== null && endDate !== null) {
+      try {
+        const result = await axios.get(`${BACKEND_URL}/availableCars`, {
+          params: { searchedStartDate: startDate, searchedEndDate: endDate },
+        });
+
+        if (result.data) {
+          setCarsList(result.data.cars);
+        } else {
+          alert("Sorry, no available car!");
+        }
+      } catch (error) {
+        console.log("Error message: ", error);
       }
-    } catch (error) {
-      console.log("Error message: ", error);
     }
   };
 
@@ -56,7 +60,7 @@ export default function SearchForm({
         type="date"
         value={startDate}
         onChange={(e) => {
-          startDate = e.target.value;
+          setStateStartDate(e.target.value);
         }}
       />
       <label>End Date</label>
@@ -64,7 +68,7 @@ export default function SearchForm({
         type="date"
         value={endDate}
         onChange={(e) => {
-          endDate = e.target.value;
+          setStateEndDate(e.target.value);
         }}
       />
       <button type="button" onClick={handleSubmit}>

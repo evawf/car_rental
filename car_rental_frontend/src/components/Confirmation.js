@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { TodosContext } from "../providers/ToDoProvider";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // make sure that axios always sends the cookies to the backend server
 import axios from "axios";
 axios.defaults.withCredentials = true;
@@ -9,6 +9,8 @@ const BACKEND_URL =
 
 export default function Confirmation({ currentCar }) {
   const { bookingList: bookings } = useContext(TodosContext);
+  let navigate = useNavigate();
+
   let booking = bookings.pop();
   console.log("my booking: ", booking);
   console.log("current car: ", currentCar);
@@ -18,12 +20,13 @@ export default function Confirmation({ currentCar }) {
         const result = await axios.post(`${BACKEND_URL}/booking`, booking);
         if (result.data === "Booking success!") {
           alert("Booking Success!");
-          return <Navigate to="/Bookings" replace={true} />;
+          navigate("/Bookings", { replace: true });
+          //return <Navigate to="/Bookings" replace={true} />;
         } else {
           alert("Booking failed!");
         }
       } else {
-        alert("Please input your contact info!");
+        alert("No booking info provided!");
       }
     } catch (error) {
       console.log("Error message: ", error);
