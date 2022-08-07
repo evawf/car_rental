@@ -1,3 +1,4 @@
+const { Car } = require("../models");
 const Base = require("./base");
 
 class Bookings extends Base {
@@ -9,7 +10,10 @@ class Bookings extends Base {
     const { email } = req.query;
     console.log(email);
     try {
-      const result = await this.model.findAll({ where: { email: email } });
+      const result = await this.model.findAll({
+        include: Car,
+        where: { email: email },
+      });
       console.log("my booking: ", result);
       if (result) {
         return res.json({ bookings: result });
