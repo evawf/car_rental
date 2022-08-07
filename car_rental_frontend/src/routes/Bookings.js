@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import axios from "axios";
-
 // make sure that axios always sends the cookies to the backend server
+import axios from "axios";
 axios.defaults.withCredentials = true;
-
 const BACKEND_URL =
   process.env.REACT_APP_CAR_RENTAL_BACKEND_URL || "http://localhost:3004";
 

@@ -67,6 +67,6 @@ export default function Cars({ carsList, setSelectedCarId, setShowSingleCar }) {
       ))}
     </div>
   ) : (
-    <div>Please choose your start date and end date!</div>
+    <div>Please input start date and end date to find available cars!</div>
   );
 }

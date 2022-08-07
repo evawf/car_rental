@@ -5,17 +5,14 @@ import Navbar from "../components/Navbar";
 import Car from "../components/Car";
 import BookingForm from "../components/BookingForm.js";
 import Confirmation from "../components/Confirmation.js";
-import axios from "axios";
-
 // make sure that axios always sends the cookies to the backend server
+import axios from "axios";
 axios.defaults.withCredentials = true;
-
 const BACKEND_URL =
   process.env.REACT_APP_CAR_RENTAL_BACKEND_URL || "http://localhost:3004";
 
 export default function Home() {
   const [carsList, setCarsList] = useState([]);
-  // const [showCarsList, setShowCarsList] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [pickupLocation, setPickupLocation] = useState("");
