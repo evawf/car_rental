@@ -16,7 +16,6 @@ export default function SearchForm({
   const [endDate, setStateEndDate] = useState(new Date());
 
   const handleSubmit = async () => {
-    console.log(`startDate: ${startDate}, endDate: ${endDate}`);
     setStartDate(startDate);
     setEndDate(endDate);
     setPickupLocation(pickupLocation);
@@ -46,7 +45,7 @@ export default function SearchForm({
         textContent: "center",
       }}
     >
-      <label>Pickup Location</label>
+      <label>Pick-up & Drop-off Location</label>
       <input
         type="location"
         placeholder="Pick-up Location"

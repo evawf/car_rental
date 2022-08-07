@@ -6,7 +6,6 @@ import { CardActionArea, CardActions } from "@mui/material";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 
 export default function Cars({ carsList, setSelectedCarId, setShowSingleCar }) {
-  console.log("car list:", carsList);
   return carsList.length ? (
     <div
       style={{

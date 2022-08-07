@@ -14,8 +14,8 @@ const BACKEND_URL =
 
 export default function Home() {
   const [carsList, setCarsList] = useState([]);
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [pickupLocation, setPickupLocation] = useState("");
   const [selectedCarId, setSelectedCarId] = useState(0);
   const [showBookingForm, setShowBookingForm] = useState(false);
@@ -23,7 +23,6 @@ export default function Home() {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [currentCar, setCurrentCar] = useState();
 
-  console.log("car id: ", selectedCarId);
   useEffect(() => {
     const getCurrentCar = async () => {
       const result = await axios.get(`${BACKEND_URL}/cars/${selectedCarId}`);
@@ -34,8 +33,6 @@ export default function Home() {
 
   return (
     <div>
-      <div>{carsList.length}</div>
-      <div>{`start Date: ${startDate} , end date : ${endDate}`}</div>
       <Navbar />
       {!showSingleCar ? (
         <div>
