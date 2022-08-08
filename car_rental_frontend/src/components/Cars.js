@@ -1,8 +1,8 @@
 import React from "react";
+import { CardActionArea, CardActions } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, CardActions } from "@mui/material";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 
 export default function Cars({ carsList, setSelectedCarId, setShowSingleCar }) {
@@ -11,10 +11,15 @@ export default function Cars({ carsList, setSelectedCarId, setShowSingleCar }) {
       style={{
         display: "flex",
         flexDirection: "column",
-        margin: "0 10px 0 10px",
+        width: "100%",
+        marginTop: "10px",
+        padding: "10px",
+        border: "1px solid lightgray",
+        borderRadius: "10px",
+        textAlign: "center",
       }}
     >
-      <h4>Available Cars: </h4>
+      <h4 style={{ margin: "0" }}>Available Cars: </h4>
       {carsList.map((car, idx) => (
         <Card
           style={{

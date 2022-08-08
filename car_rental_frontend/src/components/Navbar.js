@@ -5,12 +5,14 @@ export default function Navbar() {
   return (
     <nav>
       <ul
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-around",
-          listStyleType: "none",
-        }}
+        style={
+          {
+            // display: "flex",
+            // flexDirection: "row",
+            // justifyContent: "space-around",
+            // listStyleType: "none",
+          }
+        }
       >
         <li>
           <NavLink to="/" style={{ textDecoration: "none", color: "white" }}>
@@ -22,7 +24,7 @@ export default function Navbar() {
             to="/Bookings"
             style={{ textDecoration: "none", color: "white" }}
           >
-            Bookings
+            My Bookings
           </NavLink>
         </li>
       </ul>

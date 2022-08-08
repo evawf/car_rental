@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
+import Card from "@mui/material/Card";
 
 // make sure that axios always sends the cookies to the backend server
 import axios from "axios";
@@ -41,7 +42,13 @@ export default function Bookings() {
 
   return (
     <>
-      <main>
+      <main
+        style={{
+          width: "390px",
+          height: "844px",
+          border: "1px solid lightgray",
+        }}
+      >
         <Navbar />
         <div>
           <p>Please input email to view all your bookings: </p>
@@ -56,11 +63,19 @@ export default function Bookings() {
             </button>
             {myBookingList &&
               myBookingList.map((booking, idx) => (
-                <li key={idx}>
+                <Card
+                  key={idx}
+                  style={
+                    new Date(booking.endDate) > new Date() &&
+                    new Date(booking.startDate) > new Date()
+                      ? { backgroundColor: "green" }
+                      : { backgroundColor: "gray" }
+                  }
+                >
                   <p>My Booking Number: {booking.id}</p>
                   <p>Pickup Location: {booking.pickupLocation}</p>
-                  <p>Start Date: {booking.startDate}</p>
-                  <p>End Date: {booking.endDate}</p>
+                  <p>Start Date: {booking.startDate.slice(0, 10)} at 8:00 AM</p>
+                  <p>End Date: {booking.endDate.slice(0, 10)} at 10:00 PM</p>
                   <p>Model Name: {booking.car.model}</p>
                   <p>Total Price: ${booking.total}</p>
                   <button
@@ -70,7 +85,7 @@ export default function Bookings() {
                   >
                     Cancel
                   </button>
-                </li>
+                </Card>
               ))}
           </div>
         </div>

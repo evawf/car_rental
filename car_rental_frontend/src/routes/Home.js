@@ -32,10 +32,27 @@ export default function Home() {
   }, [selectedCarId]);
 
   return (
-    <div>
+    <div
+      style={{
+        width: "390px",
+        height: "844px",
+        border: "1px solid lightgray",
+        overflow: "scroll",
+      }}
+    >
       <Navbar />
       {!showSingleCar ? (
-        <div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: "100%",
+            height: "100%",
+            padding: "10px",
+            overflow: "scroll",
+          }}
+        >
           <SearchForm
             setCarsList={setCarsList}
             setStartDate={setStartDate}

@@ -41,8 +41,11 @@ export default function SearchForm({
       style={{
         display: "flex",
         flexDirection: "column",
-        width: "250px",
         textContent: "center",
+        width: "100%",
+        padding: "10px",
+        border: "1px solid lightgray",
+        borderRadius: "10px",
       }}
     >
       <label>Pick-up & Drop-off Location</label>
