@@ -53,10 +53,11 @@ export default function Bookings() {
           width: "390px",
           height: "844px",
           border: "1px solid lightgray",
+          overflow: "scroll",
         }}
       >
         <Navbar />
-        <div>
+        <div style={{ height: "100%", overflow: "scroll" }}>
           <Card style={{ margin: "10px" }}>
             <CardContent>
               <Typography variant="body">

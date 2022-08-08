@@ -14,12 +14,17 @@ export default function SearchForm({
   let pickupLocation;
   const [startDate, setStateStartDate] = useState(new Date());
   const [endDate, setStateEndDate] = useState(new Date());
+  let today = new Date().toISOString().slice(0, 10);
 
   const handleSubmit = async () => {
     setStartDate(startDate);
     setEndDate(endDate);
     setPickupLocation(pickupLocation);
     if (startDate !== null && endDate !== null) {
+      if (endDate < startDate) {
+        alert("Please choose correct end date!");
+        return;
+      }
       try {
         const result = await axios.get(`${BACKEND_URL}/availableCars`, {
           params: { searchedStartDate: startDate, searchedEndDate: endDate },
@@ -59,6 +64,7 @@ export default function SearchForm({
       />
       <label>Start Date</label>
       <input
+        min={today}
         type="date"
         value={startDate}
         onChange={(e) => {
@@ -67,6 +73,7 @@ export default function SearchForm({
       />
       <label>End Date</label>
       <input
+        min={today}
         type="date"
         value={endDate}
         onChange={(e) => {
