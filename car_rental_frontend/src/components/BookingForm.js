@@ -1,11 +1,18 @@
 import { useState, useContext } from "react";
 import { TodosContext } from "../providers/ToDoProvider";
 import { bookAction } from "../reducer/toDoReducer";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+// import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 export default function BookingForm({
   startDate,
   endDate,
   selectedCarId,
+  setShowBookingForm,
   setShowConfirmation,
   currentCar,
 }) {
@@ -13,18 +20,16 @@ export default function BookingForm({
   const [userPhone, setUserPhone] = useState("");
   const { ToDoDispatch: dispatch } = useContext(TodosContext);
 
-  const dayDiff = Math.floor(
-    (new Date(endDate) - new Date(startDate)) / 86400000
-  );
-
-  console.log("start date:", startDate);
-  console.log("end date: ", endDate);
-  console.log("price per day: ", currentCar.price);
-  console.log("renting days: ", dayDiff);
-  console.log("total: ", dayDiff * currentCar.price);
+  const dayDiff =
+    1 + Math.floor((new Date(endDate) - new Date(startDate)) / 86400000);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!userEmail || !userPhone) {
+      alert("Please input your email and phone number to book!");
+      return;
+    }
+
     let bookingInfo = {
       carId: selectedCarId,
       email: userEmail,
@@ -32,7 +37,6 @@ export default function BookingForm({
       startDate: startDate,
       total: dayDiff * currentCar.price,
       endDate: endDate,
-      // total: currentCar.price * (endDate - startDate),
       pickupLocation: "Changi Airport",
     };
     dispatch(await bookAction(bookingInfo));
@@ -40,29 +44,67 @@ export default function BookingForm({
   };
 
   return (
-    <div>
-      <p>Please input your contact info to book: </p>
-      <div style={{ display: "flex", flexDirection: "column", width: "250px" }}>
-        <label>Your Email</label>
-        <input
-          type="email"
-          value={userEmail}
-          onChange={(e) => {
-            setUserEmail(e.target.value);
-          }}
-        />
-        <label>Your Contact No.</label>
-        <input
-          type="number"
-          value={userPhone}
-          onChange={(e) => {
-            setUserPhone(e.target.value);
-          }}
-        />
-        <button type="button" onClick={handleSubmit}>
-          Book
-        </button>
-      </div>
-    </div>
+    <Card
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <CardContent>
+        <Typography color="primary">
+          Please input your contact info to book:{" "}
+        </Typography>
+        <div
+          style={{ display: "flex", flexDirection: "column", width: "250px" }}
+        >
+          <label>Your Email</label>
+          <input
+            type="email"
+            value={userEmail}
+            onChange={(e) => {
+              setUserEmail(e.target.value);
+            }}
+          />
+          <label>Your Contact No.</label>
+          <input
+            type="number"
+            value={userPhone}
+            onChange={(e) => {
+              setUserPhone(e.target.value);
+            }}
+          />
+          <CardActions
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Button
+              variant="contained"
+              color="success"
+              type="button"
+              style={{ width: "100px" }}
+              onClick={handleSubmit}
+            >
+              Submit
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              style={{ width: "100px" }}
+              onClick={() => {
+                setShowBookingForm(false);
+              }}
+            >
+              Back
+            </Button>
+          </CardActions>
+        </div>
+      </CardContent>
+    </Card>
   );
 }

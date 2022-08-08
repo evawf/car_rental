@@ -4,18 +4,13 @@ import { NavLink } from "react-router-dom";
 export default function Navbar() {
   return (
     <nav>
-      <ul
-        style={
-          {
-            // display: "flex",
-            // flexDirection: "row",
-            // justifyContent: "space-around",
-            // listStyleType: "none",
-          }
-        }
-      >
+      <ul>
         <li>
-          <NavLink to="/" style={{ textDecoration: "none", color: "white" }}>
+          <NavLink
+            to="/"
+            style={{ textDecoration: "none", color: "white" }}
+            replace="true"
+          >
             Home
           </NavLink>
         </li>
@@ -23,6 +18,7 @@ export default function Navbar() {
           <NavLink
             to="/Bookings"
             style={{ textDecoration: "none", color: "white" }}
+            replace="true"
           >
             My Bookings
           </NavLink>

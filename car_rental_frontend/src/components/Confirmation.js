@@ -1,13 +1,19 @@
 import { useContext } from "react";
 import { TodosContext } from "../providers/ToDoProvider";
 import { useNavigate } from "react-router-dom";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+// import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 // make sure that axios always sends the cookies to the backend server
 import axios from "axios";
 axios.defaults.withCredentials = true;
 const BACKEND_URL =
   process.env.REACT_APP_CAR_RENTAL_BACKEND_URL || "http://localhost:3004";
 
-export default function Confirmation({ currentCar }) {
+export default function Confirmation({ currentCar, setShowConfirmation }) {
   const { bookingList: bookings } = useContext(TodosContext);
   let navigate = useNavigate();
   let booking = bookings[0];
@@ -32,22 +38,65 @@ export default function Confirmation({ currentCar }) {
   };
 
   return (
-    <div>
-      <div>Booking Confirmation</div>
-      <div>
-        <h2>Start Date: {booking.startDate}</h2>
-        <h2>End Date: {booking.endDate}</h2>
-        <h2>Pickup Location: {booking.pickupLocation}</h2>
-        <h4>Name: {currentCar.name}</h4>
-        <p>Model: {currentCar.model}</p>
-        <p>Type: {currentCar.type}</p>
-        <p>Price: ${currentCar.price} / Day</p>
-        <p>Total Cost: ${booking.total}</p>
-        <h2>My Contact Info: </h2>
-        <p>Email: {booking.email}</p>
-        <p>Phone number: {booking.phoneNo}</p>
-        <button onClick={handleConfirm}>Confirm</button>
-      </div>
-    </div>
+    <Card>
+      <CardContent>
+        <Typography
+          variant="h5"
+          color="Success"
+          style={{ textAlign: "center", fontWeight: "700", color: "green" }}
+        >
+          Booking Confirmation
+          <hr></hr>
+        </Typography>
+        <Typography>
+          <h3>
+            Start Date: {booking.startDate} AT 8:00 AM<br></br>
+            End Date: {booking.endDate} AT 10:00 PM<br></br>
+            Pickup Location: {booking.pickupLocation}
+          </h3>
+          <hr></hr>
+          <p>
+            <b>Car Details:</b>
+            <br></br>
+            Name: {currentCar.name} <br></br>
+            Model: {currentCar.model} <br></br>
+            Type: {currentCar.type} <br></br>
+            Price: ${currentCar.price} / Day <br></br>
+            Total Cost: ${booking.total}
+          </p>
+          <hr></hr>
+          <p>
+            <b>My Contact Info: </b> <br></br>
+            Email: {booking.email} <br></br>
+            Phone number: {booking.phoneNo}
+          </p>
+        </Typography>
+        <CardActions
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Button
+            variant="contained"
+            color="success"
+            style={{ width: "100px" }}
+            onClick={handleConfirm}
+          >
+            Confirm
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            style={{ width: "100px" }}
+            onClick={() => setShowConfirmation(false)}
+          >
+            Back
+          </Button>
+        </CardActions>
+      </CardContent>
+    </Card>
   );
 }

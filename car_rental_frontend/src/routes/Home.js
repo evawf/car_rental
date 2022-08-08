@@ -66,12 +66,13 @@ export default function Home() {
           />
         </div>
       ) : (
-        <div>
+        <div style={{ margin: "10px" }}>
           {!showBookingForm ? (
             <Car
               selectedCarId={selectedCarId}
               setShowBookingForm={setShowBookingForm}
               currentCar={currentCar}
+              setShowSingleCar={setShowSingleCar}
             />
           ) : (
             <div>
@@ -81,11 +82,15 @@ export default function Home() {
                   endDate={endDate}
                   selectedCarId={selectedCarId}
                   pickupLocation={pickupLocation}
+                  setShowBookingForm={setShowBookingForm}
                   setShowConfirmation={setShowConfirmation}
                   currentCar={currentCar}
                 />
               ) : (
-                <Confirmation currentCar={currentCar} />
+                <Confirmation
+                  currentCar={currentCar}
+                  setShowConfirmation={setShowConfirmation}
+                />
               )}
             </div>
           )}

@@ -1,19 +1,54 @@
 import React from "react";
+import Card from "@mui/material/Card";
+import Button from "@mui/material/Button";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Typography from "@mui/material/Typography";
 
-export default function Car({ selectedCarId, setShowBookingForm, currentCar }) {
+export default function Car({
+  selectedCarId,
+  setShowBookingForm,
+  currentCar,
+  setShowSingleCar,
+}) {
   return (
-    <div>
-      <p>Single Car Page</p>
+    <Card>
       {currentCar && (
-        <div>
-          <h2>Car details: {selectedCarId}</h2>
-          <h4>Name: {currentCar.name}</h4>
-          <p>Model: {currentCar.model}</p>
-          <p>Type: {currentCar.type}</p>
-          <p>Price: ${currentCar.price} / Day</p>
-          <button onClick={() => setShowBookingForm(true)}>Book</button>
-        </div>
+        <CardContent
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="body2" color="text.secondary">
+            <h3>Name: {currentCar.name}</h3>
+            <p>
+              Model: {currentCar.model} <br></br>Type: {currentCar.type}{" "}
+              <br></br>Price: ${currentCar.price} / Day
+            </p>
+          </Typography>
+          <CardActions>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => setShowBookingForm(true)}
+            >
+              Book
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => {
+                setShowSingleCar(false);
+              }}
+            >
+              Back
+            </Button>
+          </CardActions>
+        </CardContent>
       )}
-    </div>
+    </Card>
   );
 }
