@@ -30,6 +30,27 @@ export default function BookingForm({
       return;
     }
 
+    const validateEmail = (email) => {
+      let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
+      return regex.test(email);
+    };
+    let validatedEmail = validateEmail(userEmail);
+
+    if (!validatedEmail) {
+      alert("Invalid Email!");
+      return;
+    }
+
+    const validatePhoneNo = (phone) => {
+      let regex = /^\+65[\d\s]*$/;
+      return regex.test(phone);
+    };
+    let validatedPhoneNo = validatePhoneNo(userPhone);
+    if (!validatedPhoneNo) {
+      alert("Invalide Phone Number!");
+      return;
+    }
+
     let bookingInfo = {
       carId: selectedCarId,
       email: userEmail,
@@ -69,7 +90,7 @@ export default function BookingForm({
           />
           <label>Your Contact No.</label>
           <input
-            type="number"
+            type="text"
             value={userPhone}
             onChange={(e) => {
               setUserPhone(e.target.value);

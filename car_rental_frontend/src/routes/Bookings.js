@@ -36,7 +36,6 @@ export default function Bookings() {
   };
 
   const handleCancel = async (id) => {
-    alert("Are you sure??");
     setMyBookingList(myBookingList.filter((booking) => booking.id !== id));
     try {
       const result = await axios.delete(`${BACKEND_URL}/myBookings/${id}`);
