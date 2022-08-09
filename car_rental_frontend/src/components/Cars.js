@@ -25,8 +25,8 @@ export default function Cars({ carsList, setSelectedCarId, setShowSingleCar }) {
         <Card
           style={{
             display: "block",
-            margin: "1rem 0",
-            height: "200px",
+            margin: "5px 0",
+            height: "180px",
             backgroundColor: "darkgray",
             textAlign: "center",
             color: "black",
@@ -35,15 +35,17 @@ export default function Cars({ carsList, setSelectedCarId, setShowSingleCar }) {
         >
           <CardActionArea>
             <CardContent sx={{ maxWidth: 380 }}>
-              <Typography gutterBottom variant="h6" component="div">
-                {car.name}
-              </Typography>
+              {/* <Typography gutterBottom variant="" component="div"></Typography> */}
               <Typography variant="body2" color="text.secondary">
+                <b>
+                  {car.name} {car.model}
+                </b>
+                <br />
                 <DirectionsCarIcon sx={{ color: car.color, fontSize: 20 }} />
                 <br />
-                Model: {car.model}
+                Gearbox: {car.type}
                 <br />
-                Type: {car.type}
+                Seats: {car.seats}
                 <br />
                 Price: ${car.price} / Day
               </Typography>

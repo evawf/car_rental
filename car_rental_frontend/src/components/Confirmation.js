@@ -52,16 +52,18 @@ export default function Confirmation({ currentCar, setShowConfirmation }) {
           <h3>
             Start Date: {booking.startDate} AT 8:00 AM<br></br>
             End Date: {booking.endDate} AT 10:00 PM<br></br>
-            Pickup Location: {booking.pickupLocation}
+            Pick-up and Drop-off Location: <br></br>
+            {booking.pickupLocation}
           </h3>
           <hr></hr>
           <p>
             <b>Car Details:</b>
             <br></br>
-            Name: {currentCar.name} <br></br>
-            Model: {currentCar.model} <br></br>
-            Type: {currentCar.type} <br></br>
-            Price: ${currentCar.price} / Day <br></br>
+            Name: {currentCar.name} <br />
+            Model: {currentCar.model} <br />
+            Gearbox: {currentCar.type} <br />
+            Seats: {currentCar.seats} <br />
+            Price: ${currentCar.price} / Day <br />
             <b>Total Cost: ${booking.total}</b>
           </p>
           <hr></hr>

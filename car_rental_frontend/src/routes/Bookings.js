@@ -123,13 +123,14 @@ export default function Bookings() {
                       Your Booking Number: {booking.id} <br></br>
                       Total Price: ${booking.total}
                     </b>
-                    <hr></hr>
-                    Pickup Location: {booking.pickupLocation} <br></br>
+                    <hr />
+                    Pick-up & Drop-off Location: {booking.pickupLocation} <br />
                     Start Date: {booking.startDate.slice(0, 10)} at 8:00 AM{" "}
-                    <br></br>
-                    End Date: {booking.endDate.slice(0, 10)} at 10:00 PM{" "}
-                    <br></br>
-                    Model Name: {booking.car.model} <br></br>
+                    <br />
+                    End Date: {booking.endDate.slice(0, 10)} at 10:00 PM <br />
+                    Brand: {booking.car.name} <br />
+                    Model: {booking.car.model} <br />
+                    Seats: {booking.car.seats} <br />
                   </p>
                   {new Date(booking.endDate) > new Date() &&
                   new Date(booking.startDate) > new Date() ? (

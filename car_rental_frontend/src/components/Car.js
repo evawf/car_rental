@@ -27,13 +27,15 @@ export default function Car({
             component="img"
             alt="green iguana"
             height="180"
-            image="https://assets.newcars.com/images/car-pictures/car-defaults/large/2022-bmw-x7.png"
+            image={currentCar.img}
           ></CardMedia>
           <Typography variant="body2" color="text.secondary">
-            <h3>Name: {currentCar.name}</h3>
+            <h3> {currentCar.name}</h3>
             <p>
-              Model: {currentCar.model} <br></br>Type: {currentCar.type}{" "}
-              <br></br>Price: ${currentCar.price} / Day
+              Model: {currentCar.model} <br />
+              Gearbox: {currentCar.type} <br />
+              Seats: {currentCar.seats} <br />
+              Price: ${currentCar.price} / Day
             </p>
           </Typography>
           <CardActions>
