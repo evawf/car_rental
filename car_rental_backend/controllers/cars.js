@@ -9,10 +9,6 @@ class Cars extends Base {
 
   async getAvailableCars(req, res) {
     const { searchedStartDate, searchedEndDate } = req.query;
-
-    console.log("Searched start date: ", searchedStartDate);
-    console.log("Searched end date: ", searchedEndDate);
-
     try {
       const allCars = await this.model.findAll();
       const bookedCars = await this.model.findAll({
@@ -88,15 +84,6 @@ class Cars extends Base {
         },
       });
 
-      console.log("booked cars: ", bookedCars.length);
-      console.log(
-        "booked cars list: ",
-        bookedCars.map((c) => c.id)
-      );
-      console.log(
-        "All cars list: ",
-        allCars.map((c) => c.id)
-      );
       let availableCars;
       if (bookedCars.length) {
         // availableCars = allCars.filter((c) => {
@@ -109,7 +96,6 @@ class Cars extends Base {
         //   return true;
         // });
         availableCars = allCars.filter((c) => {
-          // c.id is not in bookedCars
           let booked = false;
           bookedCars.forEach((b) => {
             if (b.id === c.id) {
