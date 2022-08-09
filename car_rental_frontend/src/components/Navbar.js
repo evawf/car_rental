@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
   return (
-    <nav>
+    <nav style={{ backgroundColor: "#154c79" }}>
       <ul>
         <li>
           <NavLink
