@@ -21,36 +21,65 @@ class Cars extends Base {
           required: true,
           model: Booking,
           where: {
+            //Option 1
+            // [Op.and]: [
+            //   {
+            //     startDate: {
+            //       [Op.lte]: searchedEndDate,
+            //     },
+            //     endDate: {
+            //       [Op.gte]: searchedStartDate,
+            //     },
+            //   },
+            // ],
+            // Option 2
+            // [Op.not]: [
+            //   {
+            //     [Op.or]: [
+            //       {
+            //         [Op.and]: [
+            //           {
+            //             startDate: {
+            //               [Op.gt]: searchedEndDate,
+            //             },
+            //           },
+            //           {
+            //             endDate: {
+            //               [Op.gt]: searchedEndDate,
+            //             },
+            //           },
+            //         ],
+            //       },
+            //       {
+            //         [Op.and]: [
+            //           {
+            //             startDate: {
+            //               [Op.lt]: searchedStartDate,
+            //             },
+            //           },
+            //           {
+            //             endDate: {
+            //               [Op.lt]: searchedStartDate,
+            //             },
+            //           },
+            //         ],
+            //       },
+            //     ],
+            //   },
+            // ],
+            // Option 3
             [Op.not]: [
               {
                 [Op.or]: [
                   {
-                    [Op.and]: [
-                      {
-                        startDate: {
-                          [Op.gt]: searchedEndDate,
-                        },
-                      },
-                      {
-                        endDate: {
-                          [Op.gt]: searchedEndDate,
-                        },
-                      },
-                    ],
+                    startDate: {
+                      [Op.gt]: searchedEndDate,
+                    },
                   },
                   {
-                    [Op.and]: [
-                      {
-                        startDate: {
-                          [Op.lt]: searchedStartDate,
-                        },
-                      },
-                      {
-                        endDate: {
-                          [Op.lt]: searchedStartDate,
-                        },
-                      },
-                    ],
+                    endDate: {
+                      [Op.lt]: searchedStartDate,
+                    },
                   },
                 ],
               },
@@ -59,23 +88,39 @@ class Cars extends Base {
         },
       });
 
-      console.log("booked cars: ", bookedCars);
-
-      const availableCars = allCars.filter((c) => {
-        if (bookedCars.length) {
-          for (let i = 0; i < bookedCars.length; i++) {
-            if (c.id === bookedCars[i].id) {
-              return false;
-            } else {
-              return true;
+      console.log("booked cars: ", bookedCars.length);
+      console.log(
+        "booked cars list: ",
+        bookedCars.map((c) => c.id)
+      );
+      console.log(
+        "All cars list: ",
+        allCars.map((c) => c.id)
+      );
+      let availableCars;
+      if (bookedCars.length) {
+        // availableCars = allCars.filter((c) => {
+        //   // c.id is not in bookedCars
+        //   for (let i = 0; i < bookedCars.length; i++) {
+        //     if (c.id === bookedCars[i].id) {
+        //       return false;
+        //     }
+        //   }
+        //   return true;
+        // });
+        availableCars = allCars.filter((c) => {
+          // c.id is not in bookedCars
+          let booked = false;
+          bookedCars.forEach((b) => {
+            if (b.id === c.id) {
+              booked = true;
             }
-          }
-        } else {
-          return true;
-        }
-      });
-
-      console.log("available cars: ", availableCars);
+          });
+          return !booked;
+        });
+      } else {
+        availableCars = allCars;
+      }
 
       if (availableCars) {
         res.json({ cars: availableCars });

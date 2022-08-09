@@ -10,6 +10,8 @@ module.exports = {
         type: faker.vehicle.type(),
         color: faker.vehicle.color(),
         price: faker.commerce.price(),
+        // img: faker.vehicle.photo(),
+        // seats: faker.vehicle.seats(),
         created_at: new Date(),
         updated_at: new Date(),
       });
