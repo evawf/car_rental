@@ -4,6 +4,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+import Button from "@mui/material/Button";
 
 export default function Cars({ carsList, setSelectedCarId, setShowSingleCar }) {
   return carsList.length ? (
@@ -34,7 +35,7 @@ export default function Cars({ carsList, setSelectedCarId, setShowSingleCar }) {
         >
           <CardActionArea>
             <CardContent sx={{ maxWidth: 380 }}>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant="h6" component="div">
                 {car.name}
               </Typography>
               <Typography variant="body2" color="text.secondary">
@@ -58,14 +59,17 @@ export default function Cars({ carsList, setSelectedCarId, setShowSingleCar }) {
               alignItems: "center",
             }}
           >
-            <button
+            <Button
+              variant="contained"
+              color="info"
+              style={{ height: "28px" }}
               onClick={() => {
                 setSelectedCarId(car.id);
                 setShowSingleCar(true);
               }}
             >
               View Deal
-            </button>
+            </Button>
           </CardActions>
         </Card>
       ))}

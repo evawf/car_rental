@@ -12,9 +12,9 @@ export default function SearchForm({
   setPickupLocation,
 }) {
   let pickupLocation;
-  const [startDate, setStateStartDate] = useState(new Date());
-  const [endDate, setStateEndDate] = useState(new Date());
   let today = new Date().toISOString().slice(0, 10);
+  const [startDate, setStateStartDate] = useState(today);
+  const [endDate, setStateEndDate] = useState(today);
 
   const handleSubmit = async () => {
     setStartDate(startDate);
