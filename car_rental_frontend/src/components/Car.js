@@ -29,14 +29,12 @@ export default function Car({
             height="180"
             image={currentCar.img}
           ></CardMedia>
+          <h3> {currentCar.name}</h3>
           <Typography variant="body2" color="text.secondary">
-            <h3> {currentCar.name}</h3>
-            <p>
-              Model: {currentCar.model} <br />
-              Gearbox: {currentCar.type} <br />
-              Seats: {currentCar.seats} <br />
-              Price: ${currentCar.price} / Day
-            </p>
+            Model: {currentCar.model} <br />
+            Gearbox: {currentCar.type} <br />
+            Seats: {currentCar.seats} <br />
+            Price: ${currentCar.price} / Day
           </Typography>
           <CardActions>
             <Button

@@ -118,43 +118,49 @@ export default function Bookings() {
                         }
                   }
                 >
-                  <p style={{ textAlign: "left" }}>
-                    <b>
-                      Your Booking Number: {booking.id} <br></br>
-                      Total Price: ${booking.total}
-                    </b>
+                  <CardContent style={{ textAlign: "center" }}>
+                    <Typography style={{ textAlign: "left" }}>
+                      <b>
+                        Your Booking Number: {booking.id} <br></br>
+                        Total Price: ${booking.total}
+                      </b>
+                    </Typography>
                     <hr />
-                    Pick-up & Drop-off Location: {booking.pickupLocation} <br />
-                    Start Date: {booking.startDate.slice(0, 10)} at 8:00 AM{" "}
-                    <br />
-                    End Date: {booking.endDate.slice(0, 10)} at 10:00 PM <br />
-                    Brand: {booking.car.name} <br />
-                    Model: {booking.car.model} <br />
-                    Seats: {booking.car.seats} <br />
-                  </p>
-                  <hr />
-                  {new Date(booking.endDate) > new Date() &&
-                  new Date(booking.startDate) > new Date() ? (
-                    <Button
-                      variant="contained"
-                      color="error"
-                      onClick={() => {
-                        handleCancel(booking.id);
-                      }}
-                    >
-                      CANCEL
-                    </Button>
-                  ) : (
-                    <Button
-                      variant="contained"
-                      color="info"
-                      onClick={() => {
-                        handleCancel(booking.id);
-                      }}
-                    >
-                      DELETE
-                    </Button>
-                  )}
+                    <Typography style={{ textAlign: "left" }}>
+                      Pick-up & Drop-off Location: {booking.pickupLocation}{" "}
+                      <br />
+                      Start Date: {booking.startDate.slice(0, 10)} at 8:00 AM{" "}
+                      <br />
+                      End Date: {booking.endDate.slice(0, 10)} at 10:00 PM{" "}
+                      <br />
+                      Brand: {booking.car.name} <br />
+                      Model: {booking.car.model} <br />
+                      Seats: {booking.car.seats} <br />
+                    </Typography>
+                    <hr />
+                    {new Date(booking.endDate) > new Date() &&
+                    new Date(booking.startDate) > new Date() ? (
+                      <Button
+                        variant="contained"
+                        color="error"
+                        onClick={() => {
+                          handleCancel(booking.id);
+                        }}
+                      >
+                        CANCEL
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="contained"
+                        color="info"
+                        onClick={() => {
+                          handleCancel(booking.id);
+                        }}
+                      >
+                        DELETE
+                      </Button>
+                    )}
+                  </CardContent>
                 </Card>
               ))}
           </div>

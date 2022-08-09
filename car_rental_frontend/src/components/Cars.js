@@ -35,7 +35,6 @@ export default function Cars({ carsList, setSelectedCarId, setShowSingleCar }) {
         >
           <CardActionArea>
             <CardContent sx={{ maxWidth: 380 }}>
-              {/* <Typography gutterBottom variant="" component="div"></Typography> */}
               <Typography variant="body2" color="text.secondary">
                 <b>
                   {car.name} {car.model}

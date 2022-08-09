@@ -90,6 +90,8 @@ export default function Home() {
                 <Confirmation
                   currentCar={currentCar}
                   setShowConfirmation={setShowConfirmation}
+                  setStartDate={setStartDate}
+                  setEndDate={setEndDate}
                 />
               )}
             </div>

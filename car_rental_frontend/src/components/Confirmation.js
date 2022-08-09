@@ -16,13 +16,13 @@ const BACKEND_URL =
 export default function Confirmation({ currentCar, setShowConfirmation }) {
   const { bookingList: bookings } = useContext(TodosContext);
   let navigate = useNavigate();
-  let booking = bookings[0];
-  console.log("booking confirmation: ", booking);
+  let booking = bookings.slice(-1);
 
   const handleConfirm = async () => {
+    console.log("clicked");
     try {
-      if (booking) {
-        const result = await axios.post(`${BACKEND_URL}/booking`, booking);
+      if (booking[0]) {
+        const result = await axios.post(`${BACKEND_URL}/booking`, booking[0]);
         if (result.data === "Booking success!") {
           alert("Booking Success!");
           navigate("/Bookings", { replace: true });
@@ -46,32 +46,32 @@ export default function Confirmation({ currentCar, setShowConfirmation }) {
           style={{ textAlign: "center", fontWeight: "700", color: "green" }}
         >
           Booking Confirmation
-          <hr></hr>
+          <hr />
         </Typography>
         <Typography>
-          <h3>
-            Start Date: {booking.startDate} AT 8:00 AM<br></br>
-            End Date: {booking.endDate} AT 10:00 PM<br></br>
+          <b>
+            Start Date: {booking[0].startDate} AT 8:00 AM<br></br>
+            End Date: {booking[0].endDate} AT 10:00 PM<br></br>
             Pick-up and Drop-off Location: <br></br>
-            {booking.pickupLocation}
-          </h3>
-          <hr></hr>
-          <p>
-            <b>Car Details:</b>
-            <br></br>
-            Name: {currentCar.name} <br />
-            Model: {currentCar.model} <br />
-            Gearbox: {currentCar.type} <br />
-            Seats: {currentCar.seats} <br />
-            Price: ${currentCar.price} / Day <br />
-            <b>Total Cost: ${booking.total}</b>
-          </p>
-          <hr></hr>
-          <p>
-            <b>My Contact Info: </b> <br></br>
-            Email: {booking.email} <br></br>
-            Phone number: {booking.phoneNo}
-          </p>
+            {booking[0].pickupLocation}
+          </b>
+        </Typography>
+        <hr />
+        <Typography>
+          <b>Car Details:</b>
+          <br></br>
+          Name: {currentCar.name} <br />
+          Model: {currentCar.model} <br />
+          Gearbox: {currentCar.type} <br />
+          Seats: {currentCar.seats} <br />
+          Price: ${currentCar.price} / Day <br />
+          <b style={{ color: "red" }}>Total Cost: ${booking[0].total}</b>
+        </Typography>
+        <hr />
+        <Typography>
+          <b>My Contact Info: </b> <br></br>
+          Email: {booking[0].email} <br></br>
+          Phone number: {booking[0].phoneNo}
         </Typography>
         <CardActions
           style={{
