@@ -13,6 +13,7 @@ class Bookings extends Base {
       const result = await this.model.findAll({
         include: Car,
         where: { email: email },
+        order: [["start_date", "DESC"]],
       });
       console.log("my booking: ", result);
       if (result) {
