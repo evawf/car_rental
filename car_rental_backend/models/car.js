@@ -20,6 +20,10 @@ const initCarModel = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.TEXT,
       },
+      seats: {
+        allowNull: true,
+        type: DataTypes.INTEGER,
+      },
       color: {
         allowNull: false,
         type: DataTypes.TEXT,
@@ -27,6 +31,10 @@ const initCarModel = (sequelize, DataTypes) => {
       price: {
         allowNull: false,
         type: DataTypes.DECIMAL,
+      },
+      img: {
+        allowNull: true,
+        type: DataTypes.TEXT,
       },
       createdAt: {
         allowNull: false,
