@@ -36,7 +36,7 @@ export default function Bookings() {
   };
 
   const handleCancel = async (id) => {
-    console.log("selected booking id: ", id);
+    alert("Are you sure??");
     setMyBookingList(myBookingList.filter((booking) => booking.id !== id));
     try {
       const result = await axios.delete(`${BACKEND_URL}/myBookings/${id}`);
@@ -98,7 +98,7 @@ export default function Bookings() {
               </CardContent>
             </CardContent>
           </Card>
-          <div>
+          <div style={{ textAlign: "center" }}>
             {myBookingList &&
               myBookingList.map((booking, idx) => (
                 <Card
@@ -107,7 +107,7 @@ export default function Bookings() {
                     new Date(booking.endDate) > new Date() &&
                     new Date(booking.startDate) > new Date()
                       ? {
-                          backgroundColor: "lightblue",
+                          backgroundColor: "#0b9c53",
                           margin: "10px",
                           padding: "10px",
                         }
@@ -118,7 +118,7 @@ export default function Bookings() {
                         }
                   }
                 >
-                  <p>
+                  <p style={{ textAlign: "left" }}>
                     <b>
                       Your Booking Number: {booking.id} <br></br>
                       Total Price: ${booking.total}
@@ -132,6 +132,7 @@ export default function Bookings() {
                     Model: {booking.car.model} <br />
                     Seats: {booking.car.seats} <br />
                   </p>
+                  <hr />
                   {new Date(booking.endDate) > new Date() &&
                   new Date(booking.startDate) > new Date() ? (
                     <Button
@@ -146,7 +147,7 @@ export default function Bookings() {
                   ) : (
                     <Button
                       variant="contained"
-                      color="error"
+                      color="info"
                       onClick={() => {
                         handleCancel(booking.id);
                       }}

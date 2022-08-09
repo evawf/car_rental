@@ -73,7 +73,7 @@ export default function SearchForm({
       />
       <label>End Date</label>
       <input
-        min={today}
+        min={startDate}
         type="date"
         value={endDate}
         onChange={(e) => {
